@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Next Meme</string>
+    <string-array name="pictures">
+        <item> https://asset.kompas.com/crops/0Pca1sWiO77FsorDJuHX1N6gQy0=/85x171:913x723/750x500/data/photo/2018/12/20/1385085219.jpg</item>
+        <item> https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ywuntxOXDWwTggm_olcTYHwJbL9fThAe6A&amp;usqp=CAU</item>
+        <item> https://asset.kompas.com/crops/0Pca1sWiO77FsorDJuHX1N6gQy0=/85x171:913x723/750x500/data/photo/2018/12/20/1385085219.jpg</item>
+        <item> https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ywuntxOXDWwTggm_olcTYHwJbL9fThAe6A&amp;usqp=CAU</item>
+    </string-array>
+</resources>
