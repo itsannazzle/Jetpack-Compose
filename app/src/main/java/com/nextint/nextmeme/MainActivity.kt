@@ -11,14 +11,22 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nextint.nextmeme.model.IdolData
 import com.nextint.nextmeme.ui.theme.NextMemeTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,9 +54,6 @@ fun MyApp(content : @Composable () -> Unit){
         }
     }
 }
-
-data class DataNames (val names : List<String>, val group : List<String>)
-
 @Composable
 fun Greeting(name: String) {
     var isSelected by remember {
@@ -71,7 +76,7 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun MultipleGreeting(idolName : DataNames){
+fun MultipleGreeting(idolName : IdolData){
     val counter = remember {
         mutableStateOf(0)
     }
@@ -128,20 +133,99 @@ fun ShowDataWithLazyColumn(loveValue : List<String> = List(1000){ "$it"}, modifi
     }
 }
 
+@Composable
+fun DramaProfileCard(modifier: Modifier = Modifier){
+    Row(
+
+        modifier
+            .clickable(onClick = {})
+            .padding(16.dp)
+            .clip(RoundedCornerShape(4.dp))
+            .background(color = MaterialTheme.colors.surface),
+
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Surface(
+            modifier = Modifier.size(50.dp),
+            shape = CircleShape,
+            color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
+        ) {
+        }
+//        Image(painterResource(id = R.string.app_name))
+        Column(
+            modifier = Modifier.padding(4.dp)
+        ) {
+            Text(
+                text = "Start up",
+                fontWeight = FontWeight.Bold,
+            )
+            CompositionLocalProvider(
+                LocalContentAlpha provides ContentAlpha.medium) {
+                Text(
+                    text = "October 17, 2020",
+                    style = MaterialTheme.typography.body2
+                    )
+            }
+
+        }
+        Button(onClick = { /*TODO*/ }, modifier
+            .padding(4.dp)) {
+            Text(text = "See more")
+        }
+    }
+}
+
+@Composable
+fun LayoutCodeLab(){
+    Scaffold(topBar = {
+       TopAppBar(title = {
+           Text(text = "Top app bar", style = MaterialTheme.typography.h5)
+       })
+    }) {
+        innerPadding ->
+        BodyContent(Modifier.padding(innerPadding))
+    }
+}
+
+@Composable
+fun BodyContent(modifier : Modifier = Modifier){
+    Column(modifier = modifier) {
+        Text(text = "Sup there!")
+        Text(text = "Have a good day folks")
+    }
+}
+
 
 @Preview(showBackground = true)
+@Composable
+fun LayoutCodeLabPreview(){
+    NextMemeTheme {
+        LayoutCodeLab()
+    }
+}
+
+
+@Composable
+fun DramaProfileCardPreview(){
+    NextMemeTheme {
+           DramaProfileCard()
+    }
+}
+
 @Composable
 fun DefaultPreview() {
    MyApp{
        Column() {
            Greeting("Chanyeol")
-           MultipleGreeting(DataNames(mutableListOf("Kai","Suho","Jinyoung","Felix"),
-               mutableListOf("EXO","EXO","GOT7","SKZ")))
+           MultipleGreeting(
+               IdolData(mutableListOf("Kai","Suho","Jinyoung","Felix"),
+               mutableListOf("EXO","EXO","GOT7","SKZ"))
+           )
        }
    }
 }
 
-@Preview(showBackground = true)
+
 @Composable
 fun LazyPreview(){
     ShowDataWithLazyColumn()
